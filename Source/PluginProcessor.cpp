@@ -141,14 +141,14 @@ void ImpleAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& m
 		if (midiCurrent.isNoteOn()) {
 			if (blockAlign) {
 				for (int channel = 0; channel < getNumOutputChannels(); ++channel) {
-					buffer.setSample(channel, midiCurrentSample, gain);
-				}
-			}
-			else {
-				for (int channel = 0; channel < getNumOutputChannels(); ++channel) {
 					buffer.setSample(channel, 0, gain);
 				}
 				break;
+			}
+			else {
+				for (int channel = 0; channel < getNumOutputChannels(); ++channel) {
+					buffer.setSample(channel, midiCurrentSample, gain);
+				}
 			}
 		}
 	}
