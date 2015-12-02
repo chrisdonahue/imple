@@ -19,7 +19,7 @@ ImpleAudioProcessor::ImpleAudioProcessor() :
 	addParameter(new AudioParameterBool("blockAlign", "blockAlign", true));
 	addParameter(new AudioParameterBool("phaseInvert", "phaseInvert", false));
 	addParameter(new AudioParameterBool("hold", "phaseInvert", false));
-	addParameter(new AudioParameterFloat("gain", "gain", NormalisableRange<float>(0.0f, 0.1f, 0.01f), 1.0f));
+	addParameter(new AudioParameterFloat("gain", "gain", NormalisableRange<float>(0.0f, 1.0f, 0.01f), 1.0f));
 }
 
 ImpleAudioProcessor::~ImpleAudioProcessor()
