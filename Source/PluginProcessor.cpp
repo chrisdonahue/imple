@@ -143,6 +143,8 @@ void ImpleAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& m
 				for (int channel = 0; channel < getNumOutputChannels(); ++channel) {
 					buffer.setSample(channel, 0, gain);
 				}
+				midiMessages.clear();
+				midiMessages.addEvent(midiCurrent, 0);
 				break;
 			}
 			else {
@@ -151,10 +153,16 @@ void ImpleAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& m
 				}
 			}
 		}
+		if (midiCurrent.isNoteOff()) {
+			if (blockAlign) {
+				midiMessages.clear();
+				midiMessages.addEvent(midiCurrent, 0);
+				break;
+			}
+		}
 	}
-	midiMessages.clear();
 
-	// process button clicks
+	// process pulse train or button click
 	if (hold || letsGo) {
 		for (int channel = 0; channel < getNumOutputChannels(); ++channel) {
 			buffer.setSample(channel, 0, gain);
